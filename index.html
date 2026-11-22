@@ -1,0 +1,574 @@
+::variant="standard" title="VAMSHI Portfolio – Website Code" id="82641"}
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+
+<title>VAMSHI — Beyond Limits</title>
+
+<meta name="description" content="VAMSHI — Think Different. Build Bigger. Create Impact.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #080808;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+}
+
+::selection {
+    background: #ff642d;
+    color: white;
+}
+
+.cursor-glow {
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: rgba(255, 91, 35, 0.08);
+    filter: blur(90px);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: rgba(8,8,8,0.75);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.logo {
+    font-family: 'Space Grotesk';
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+.logo span {
+    color: #ff642d;
+}
+
+nav a {
+    color: #aaa;
+    text-decoration: none;
+    margin-left: 30px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: #ff642d;
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 20px 70px;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle,rgba(255,89,36,.17),transparent 70%);
+    z-index: -1;
+}
+
+.eyebrow {
+    color: #ff7545;
+    font-size: 11px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 35px;
+}
+
+.hero h1 {
+    font-family: 'Space Grotesk';
+    font-size: clamp(65px, 15vw, 180px);
+    line-height: .9;
+    letter-spacing: -10px;
+    font-weight: 700;
+    background: linear-gradient(180deg,#fff 20%,#777 100%);
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: reveal 1.5s ease forwards;
+}
+
+@keyframes reveal {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+        filter: blur(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+.hero h2 {
+    font-family: 'Space Grotesk';
+    font-size: clamp(20px,4vw,38px);
+    font-weight: 400;
+    margin-top: 35px;
+}
+
+.hero h2 span {
+    color: #ff642d;
+}
+
+.hero p {
+    color: #888;
+    margin-top: 22px;
+    font-size: 14px;
+    line-height: 2;
+}
+
+.hero-button {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 17px 35px;
+    border: 1px solid #ff642d;
+    color: white;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2px;
+    transition: .4s;
+}
+
+.hero-button:hover {
+    background: #ff642d;
+    box-shadow: 0 0 35px rgba(255,100,45,.4);
+}
+
+.scroll {
+    position: absolute;
+    bottom: 35px;
+    color: #666;
+    font-size: 10px;
+    letter-spacing: 4px;
+}
+
+section {
+    padding: 120px 9%;
+    position: relative;
+}
+
+.section-label {
+    color: #ff642d;
+    letter-spacing: 5px;
+    font-size: 11px;
+    margin-bottom: 25px;
+}
+
+.section-title {
+    font-family: 'Space Grotesk';
+    font-size: clamp(35px,7vw,75px);
+    line-height: 1.1;
+    letter-spacing: -3px;
+    max-width: 850px;
+}
+
+.section-title span {
+    color: #ff642d;
+}
+
+.about-text {
+    max-width: 650px;
+    color: #999;
+    font-size: 16px;
+    line-height: 2;
+    margin-top: 35px;
+}
+
+.divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,.1);
+}
+
+.project-card {
+    margin-top: 60px;
+    border: 1px solid rgba(255,255,255,.1);
+    background: linear-gradient(130deg,#171717,#0b0b0b);
+    padding: 65px 55px;
+    position: relative;
+    overflow: hidden;
+    transition: .4s;
+}
+
+.project-card:hover {
+    border-color: #ff642d;
+    transform: translateY(-8px);
+}
+
+.project-number {
+    color: #ff642d;
+    letter-spacing: 4px;
+    font-size: 12px;
+}
+
+.project-card h3 {
+    font-family: 'Space Grotesk';
+    font-size: clamp(45px,9vw,90px);
+    margin: 35px 0 15px;
+}
+
+.project-card p {
+    color: #999;
+    max-width: 550px;
+    line-height: 2;
+    font-size: 15px;
+}
+
+.project-tag {
+    display: inline-block;
+    border: 1px solid #444;
+    padding: 10px 17px;
+    margin-top: 30px;
+    margin-right: 10px;
+    color: #aaa;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.vision {
+    text-align: center;
+    background: linear-gradient(180deg,#080808,#130b08,#080808);
+}
+
+.vision .section-title {
+    margin: auto;
+}
+
+.vision-text {
+    color: #888;
+    max-width: 650px;
+    margin: 35px auto;
+    line-height: 2;
+}
+
+.final {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: radial-gradient(ellipse at center, #211008 0%,#080808 65%);
+    overflow: hidden;
+}
+
+.photo-frame {
+    width: min(300px,75vw);
+    height: 380px;
+    border: 1px solid rgba(255,100,45,.5);
+    padding: 8px;
+    margin-bottom: 45px;
+    position: relative;
+    box-shadow: 0 0 70px rgba(255,100,45,.12);
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.final h2 {
+    font-family: 'Space Grotesk';
+    font-size: clamp(50px,12vw,115px);
+    letter-spacing: -5px;
+}
+
+.final h2 span {
+    color: #ff642d;
+}
+
+.final p {
+    color: #888;
+    letter-spacing: 4px;
+    font-size: 11px;
+    margin-top: 20px;
+}
+
+footer {
+    padding: 35px;
+    border-top: 1px solid #222;
+    text-align: center;
+    color: #555;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+footer span {
+    color: #ff642d;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(45px);
+    transition: 1s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media(max-width:650px) {
+    nav {
+        padding: 20px 5%;
+    }
+
+    nav a {
+        margin-left: 12px;
+        font-size: 9px;
+    }
+
+    .logo {
+        font-size: 19px;
+    }
+
+    .hero h1 {
+        letter-spacing: -5px;
+    }
+
+    section {
+        padding: 90px 7%;
+    }
+
+    .project-card {
+        padding: 40px 25px;
+    }
+
+    .final h2 {
+        letter-spacing: -3px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="cursor-glow" id="glow"></div>
+
+<nav>
+    <div class="logo">V<span>.</span></div>
+    <div>
+        <a href="#about">ABOUT</a>
+        <a href="#project">PROJECT</a>
+        <a href="#vision">VISION</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+
+<header class="hero">
+
+    <div class="eyebrow">PERSONAL DIGITAL IDENTITY</div>
+
+    <h1>VAMSHI</h1>
+
+    <h2>Not Here to Follow.<br><span>Here to Create.</span></h2>
+
+    <p>
+        Think Different. Build Bigger.<br>
+        Create Something That Matters.
+    </p>
+
+    <a href="#about" class="hero-button">EXPLORE MY WORLD ↗</a>
+
+    <div class="scroll">SCROLL TO DISCOVER ↓</div>
+
+</header>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+
+<section id="about">
+
+    <div class="reveal">
+        <div class="section-label">01 / ABOUT ME</div>
+
+        <h2 class="section-title">
+            More Than A Name.<br>
+            <span>A Vision.</span>
+        </h2>
+
+        <p class="about-text">
+            I believe every great idea starts with imagination.
+            I am passionate about exploring possibilities,
+            building meaningful digital experiences and
+            turning ambitious ideas into something real.
+            <br><br>
+            This is my journey. This is my vision.
+            And this is only the beginning.
+        </p>
+    </div>
+
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECT -->
+
+<section id="project">
+
+    <div class="reveal">
+
+        <div class="section-label">02 / SELECTED PROJECT</div>
+
+        <h2 class="section-title">
+            Ideas Into<br>
+            <span>Impact.</span>
+        </h2>
+
+        <div class="project-card">
+
+            <div class="project-number">FEATURED PROJECT / 001</div>
+
+            <h3>Little Help.</h3>
+
+            <p>
+                A platform built around one powerful idea:
+                connecting people who need help with people
+                who are willing to help.
+                <br><br>
+                Because even a small act of kindness
+                can make a big difference.
+            </p>
+
+            <div class="project-tag">SOCIAL IMPACT</div>
+            <div class="project-tag">TECHNOLOGY</div>
+            <div class="project-tag">COMMUNITY</div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<div class="divider"></div>
+
+<!-- VISION -->
+
+<section class="vision" id="vision">
+
+    <div class="reveal">
+
+        <div class="section-label">03 / MY VISION</div>
+
+        <h2 class="section-title">
+            Dream Beyond<br>
+            <span>Limits.</span>
+        </h2>
+
+        <p class="vision-text">
+            The future belongs to those who dare to imagine it.
+            I believe in learning, creating, taking action
+            and building things that leave a meaningful impact.
+            <br><br>
+            No limits. No boundaries. Just possibilities.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- FINAL PHOTO REVEAL -->
+
+<section class="final">
+
+    <div class="reveal">
+
+        <div class="photo-frame">
+            <img src="vamshi.jpg"
+                 alt="Vamshi"
+                 onerror="this.style.display='none'">
+        </div>
+
+        <div class="section-label">THE PERSON BEHIND THE VISION</div>
+
+        <h2>THIS IS<br><span>VAMSHI.</span></h2>
+
+        <p>ONE VISION. ENDLESS POSSIBILITIES.</p>
+
+    </div>
+
+</section>
+
+<footer>
+    MADE WITH <span>VISION</span> · VAMSHI
+</footer>
+
+<script>
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting) {
+            entry.target.classList.add("active");
+        }
+
+    });
+
+}, {threshold: 0.15});
+
+document.querySelectorAll(".reveal").forEach(el => {
+    observer.observe(el);
+});
+
+const glow = document.getElementById("glow");
+
+document.addEventListener("mousemove", (e) => {
+
+    glow.style.left = e.clientX + "px";
+    glow.style.top = e.clientY + "px";
+
+});
+
+</script>
+
+</body>
+</html>
+```

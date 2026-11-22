@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VAMSHI — Beyond Ordinary</title>
+<title>VAMSHI — Cinematic Experience</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;400;600;800;900&display=swap" rel="stylesheet">
@@ -12,357 +12,331 @@
 *{margin:0;padding:0;box-sizing:border-box}
 
 :root{
- --gold:#e8bd70;
- --red:#8e171e;
- --black:#080808;
+ --gold:#e9bd70;
+ --red:#a51e20;
+ --black:#050505;
 }
 
-html{scroll-behavior:auto}
-body{
- background:var(--black);
+html,body{
+ width:100%;
+ height:100%;
+ overflow:hidden;
+ background:#050505;
  color:white;
  font-family:Montserrat,sans-serif;
- overflow-x:hidden;
 }
-
-body:after{
- content:"";
- position:fixed;
- inset:0;
- z-index:100;
- pointer-events:none;
- opacity:.10;
- background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
-}
-
-*{cursor:default}
 
 #progress{
  position:fixed;
- top:0;
- left:0;
+ top:0;left:0;
+ width:0%;
  height:3px;
- width:0;
  background:var(--gold);
- z-index:200;
+ z-index:1000;
+ box-shadow:0 0 15px var(--gold);
 }
 
-.topbar{
- position:fixed;
- top:0;
+#stage{
+ position:relative;
  width:100%;
- z-index:50;
- padding:25px 6%;
- display:flex;
- justify-content:space-between;
- align-items:center;
- mix-blend-mode:difference;
-}
-
-.brand{
- font-size:17px;
- font-weight:900;
- letter-spacing:6px;
-}
-
-.topbar span{
- font-size:9px;
- letter-spacing:4px;
-}
-
-section{
- min-height:100vh;
- position:relative;
+ height:100%;
  overflow:hidden;
- display:flex;
- justify-content:center;
- align-items:center;
- padding:80px 7%;
+ background:#050505;
 }
 
-.hero{
- background:
- radial-gradient(ellipse at 50% 60%,#a52c28 0%,#481014 28%,#15090b 65%,#050505 100%);
-}
-
-.hero:before{
- content:"";
+.scene{
  position:absolute;
- width:70vw;
- height:70vw;
- background:#f04a26;
- filter:blur(160px);
- opacity:.2;
- animation:fire 7s ease-in-out infinite alternate;
-}
-
-@keyframes fire{
- to{transform:scale(1.4);opacity:.4}
-}
-
-.hero-content{
- position:relative;
+ inset:0;
+ display:flex;
+ align-items:center;
+ justify-content:center;
  text-align:center;
- z-index:3;
+ overflow:hidden;
+ opacity:0;
+ visibility:hidden;
+ transform:scale(1.08);
+ transition:opacity 1s ease,transform 1.4s ease,visibility 1s;
+}
+
+.scene.active{
+ opacity:1;
+ visibility:visible;
+ transform:scale(1);
+ z-index:2;
+}
+
+.content{
+ position:relative;
+ z-index:5;
+ width:90%;
+ max-width:1200px;
+}
+
+h1,h2,.giant{
+ font-family:Anton,sans-serif;
+ font-weight:400;
+ line-height:.88;
+ letter-spacing:-2px;
+}
+
+.gold{
+ color:var(--gold);
+}
+
+.outline{
+ color:transparent;
+ -webkit-text-stroke:1px var(--gold);
 }
 
 .label{
  color:var(--gold);
  font-size:10px;
  letter-spacing:8px;
- margin-bottom:35px;
+ margin-bottom:30px;
 }
 
-.hero h1{
- font-family:Anton,sans-serif;
- font-size:clamp(90px,21vw,280px);
- line-height:.8;
- letter-spacing:-5px;
- background:linear-gradient(180deg,#fff4d9,#e8bd70 55%,#87501c);
- -webkit-background-clip:text;
- color:transparent;
- text-shadow:0 20px 70px #0008;
-}
-
-.hero h2{
- font-family:Anton,sans-serif;
- font-size:clamp(25px,5vw,65px);
- letter-spacing:12px;
- margin-top:35px;
- color:#fff;
-}
-
-.subtitle{
- font-size:10px;
- letter-spacing:6px;
- margin-top:30px;
+.small{
+ font-size:11px;
+ letter-spacing:5px;
  color:#ddd;
+ margin-top:30px;
 }
 
-/* Falling human silhouette */
+.giant{
+ font-size:clamp(80px,19vw,260px);
+}
 
-.falling{
+.sub{
+ font-size:clamp(22px,5vw,60px);
+ letter-spacing:8px;
+ margin-top:25px;
+}
+
+/* BACKGROUNDS */
+
+.s1{
+ background:
+ radial-gradient(ellipse at 50% 70%,#a63820 0%,#481012 30%,#100607 70%,#030303 100%);
+}
+
+.s2{
+ background:
+ radial-gradient(circle at center,#fff 0%,#ddd 40%,#aaa 100%);
+ color:#050505;
+}
+
+.s3{
+ background:
+ radial-gradient(circle at center,#e18a32 0%,#722015 25%,#160606 65%,#030303 100%);
+}
+
+.s4{
+ background:
+ radial-gradient(ellipse at 50% 50%,#613c16,#1a0c08 45%,#030303 100%);
+}
+
+.s5{
+ background:
+ radial-gradient(ellipse at center,#263b49,#10151d 50%,#030303 100%);
+}
+
+.s6{
+ background:
+ radial-gradient(ellipse at center,#8b281b,#2a090a 55%,#030303 100%);
+}
+
+.s7{
+ background:
+ radial-gradient(ellipse at center,#50301a,#100b08 55%,#030303 100%);
+}
+
+.s8{
+ background:
+ radial-gradient(ellipse at center,#66291d,#100808 65%,#030303 100%);
+}
+
+/* LIGHT EFFECTS */
+
+.energy{
  position:absolute;
- z-index:4;
- top:-300px;
+ width:65vw;
+ height:65vw;
+ border-radius:50%;
+ background:#ff531d;
+ filter:blur(130px);
+ opacity:.22;
+ animation:energy 5s infinite alternate;
+}
+
+@keyframes energy{
+ from{transform:scale(.7);opacity:.12}
+ to{transform:scale(1.3);opacity:.4}
+}
+
+.orb{
+ position:absolute;
+ width:230px;
+ height:230px;
+ border-radius:50%;
+ background:radial-gradient(circle at 35% 30%,#fff2c5,#ed9b38 20%,#8e2514 50%,transparent 72%);
+ box-shadow:0 0 80px #ff7b26,0 0 180px #c73518;
+ animation:orb 6s ease-in-out infinite alternate;
+}
+
+@keyframes orb{
+ from{transform:scale(.7) rotate(0deg)}
+ to{transform:scale(1.3) rotate(30deg)}
+}
+
+/* FALLING HUMAN */
+
+.human{
+ position:absolute;
+ top:-260px;
  left:50%;
- width:100px;
- height:250px;
+ width:90px;
+ height:230px;
  transform:translateX(-50%);
- animation:fall 12s ease-in-out infinite;
- filter:drop-shadow(0 0 30px #e7b65e);
+ z-index:4;
+ filter:drop-shadow(0 0 25px #e9bd70);
+ animation:fall 7s ease-in-out infinite;
+}
+
+.human svg{
+ width:100%;
+ height:100%;
 }
 
 @keyframes fall{
- 0%{
-  top:-300px;
-  transform:translateX(-50%) rotate(-15deg);
-  opacity:0;
- }
- 12%{opacity:1}
- 40%{transform:translateX(-50%) rotate(15deg)}
- 70%{transform:translateX(-50%) rotate(-8deg)}
- 100%{
-  top:110%;
-  transform:translateX(-50%) rotate(12deg);
-  opacity:0;
- }
+ 0%{top:-260px;transform:translateX(-50%) rotate(-20deg);opacity:0}
+ 15%{opacity:1}
+ 50%{transform:translateX(-50%) rotate(18deg)}
+ 100%{top:110%;transform:translateX(-50%) rotate(-15deg);opacity:0}
 }
 
-.falling svg{width:100%;height:100%}
+/* TEXT ANIMATIONS */
 
-/* Moving words */
+.enter{
+ animation:enter 1.4s cubic-bezier(.16,1,.3,1) both;
+}
+
+@keyframes enter{
+ from{opacity:0;transform:translateY(100px) scale(.8)}
+ to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+.zoom{
+ animation:zoom 5s ease-in-out infinite alternate;
+}
+
+@keyframes zoom{
+ from{transform:scale(.9)}
+ to{transform:scale(1.12)}
+}
+
+.slide{
+ animation:slide 12s linear infinite;
+ white-space:nowrap;
+}
+
+@keyframes slide{
+ from{transform:translateX(40%)}
+ to{transform:translateX(-40%)}
+}
 
 .marquee{
+ position:absolute;
+ left:0;
+ bottom:8%;
  width:100%;
  overflow:hidden;
  white-space:nowrap;
- background:#100c0b;
- border-top:1px solid #ffffff25;
- border-bottom:1px solid #ffffff25;
- padding:25px 0;
-}
-
-.marquee div{
- display:inline-block;
  font-family:Anton,sans-serif;
- font-size:clamp(40px,8vw,100px);
- color:var(--gold);
- animation:marquee 25s linear infinite;
+ font-size:clamp(35px,7vw,85px);
+ color:#e9bd70;
+ opacity:.65;
 }
 
-@keyframes marquee{
- from{transform:translateX(0)}
- to{transform:translateX(-50%)}
-}
+/* ABOUT */
 
-.scene{
- text-align:center;
- flex-direction:column;
-}
-
-.scene-one{
- background:
- radial-gradient(ellipse at center,#851b22,#250c10 55%,#080808);
-}
-
-.scene-two{
- background:
- radial-gradient(ellipse at center,#644019,#211508 50%,#080808);
-}
-
-.scene-three{
- background:
- radial-gradient(ellipse at center,#3e1720,#0b0809 70%);
-}
-
-.scene h2{
- font-family:Anton,sans-serif;
- font-size:clamp(65px,14vw,175px);
- line-height:.9;
-}
-
-.gold{color:var(--gold)}
-
-.stroke{
- color:transparent;
- -webkit-text-stroke:1px var(--gold);
-}
-
-.small-label{
- font-size:10px;
- letter-spacing:8px;
- color:var(--gold);
- margin-bottom:35px;
-}
-
-.description{
- max-width:650px;
- line-height:2;
- font-size:14px;
- color:#bbb;
- margin-top:35px;
-}
-
-/* About */
-
-.about{
- background:#090909;
-}
-
-.about-inner{
- max-width:1000px;
-}
-
-.about h2{
- font-family:Anton,sans-serif;
- font-size:clamp(70px,14vw,170px);
- line-height:.9;
- color:var(--gold);
-}
-
-.about p{
- max-width:650px;
- line-height:2;
- font-size:15px;
- color:#aaa;
- margin-top:40px;
-}
-
-/* Project */
-
-.project{
- background:
- linear-gradient(135deg,#24150d,#090909 70%);
-}
-
-.project-inner{
- max-width:1000px;
- width:100%;
-}
-
-.project h2{
- font-family:Anton,sans-serif;
- font-size:clamp(75px,16vw,190px);
- line-height:.85;
- color:var(--gold);
-}
-
-.project-card{
- margin-top:50px;
- max-width:650px;
- padding:35px;
- border:1px solid #8f713f;
- background:#ffffff06;
-}
-
-.project-card h3{
- font-size:30px;
- margin-bottom:20px;
-}
-
-.project-card p{
- color:#aaa;
+.aboutText{
+ max-width:750px;
+ margin:35px auto 0;
+ color:#ccc;
  line-height:2;
  font-size:14px;
 }
 
-/* Final portrait */
+/* PROJECT */
 
-.final{
- background:
- radial-gradient(ellipse at center,#62261c,#0a0808 70%);
- flex-direction:column;
- text-align:center;
+.projectCard{
+ max-width:650px;
+ margin:35px auto 0;
+ padding:30px;
+ border:1px solid #c39a5a;
+ background:#ffffff09;
+ text-align:left;
 }
 
-.final h2{
- font-family:Anton,sans-serif;
- font-size:clamp(80px,17vw,200px);
+.projectCard h3{
+ font-size:28px;
+ margin-bottom:18px;
  color:var(--gold);
 }
 
-.final img{
- width:min(80%,420px);
- height:500px;
+.projectCard p{
+ line-height:2;
+ font-size:14px;
+ color:#ccc;
+}
+
+/* FINAL */
+
+.finalPhoto{
+ width:min(75vw,390px);
+ height:min(55vh,480px);
  object-fit:cover;
  object-position:center;
- margin-top:45px;
  border:1px solid var(--gold);
- box-shadow:0 0 100px #e8bd7030;
-}
-
-.final p{
+ box-shadow:0 0 80px #e9bd7040;
  margin-top:30px;
- font-size:10px;
- letter-spacing:7px;
+}
+
+.footerText{
+ margin-top:25px;
  color:#ddd;
-}
-
-footer{
- background:#080808;
- padding:35px;
- text-align:center;
- color:#888;
  font-size:10px;
- letter-spacing:5px;
+ letter-spacing:6px;
 }
 
-.reveal{
- opacity:0;
- transform:translateY(70px);
- transition:opacity 1.5s,transform 1.5s;
+/* GRAIN */
+
+#grain{
+ position:fixed;
+ inset:0;
+ pointer-events:none;
+ z-index:20;
+ opacity:.12;
+ background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
 }
 
-.reveal.visible{
- opacity:1;
- transform:translateY(0);
+#hint{
+ position:fixed;
+ bottom:20px;
+ right:20px;
+ z-index:50;
+ font-size:9px;
+ letter-spacing:2px;
+ color:#ffffff55;
 }
 
 @media(max-width:600px){
- .hero h1{letter-spacing:-2px}
- .falling{width:65px;height:180px}
- .final img{height:400px}
+ .giant{font-size:22vw}
+ .label{letter-spacing:4px}
+ .sub{letter-spacing:4px}
+ .human{width:65px;height:180px}
+ .orb{width:150px;height:150px}
+ .projectCard{padding:20px}
 }
 </style>
 </head>
@@ -370,21 +344,21 @@ footer{
 <body>
 
 <div id="progress"></div>
+<div id="grain"></div>
 
-<header class="topbar">
- <div class="brand">VAMSHI®</div>
- <span>PERSONAL PORTFOLIO</span>
-</header>
-
-<audio id="music" autoplay loop preload="auto">
+<audio id="music" preload="auto">
  <source src="vamshi-cinematic-audio.mp3" type="audio/mpeg">
 </audio>
 
-<main id="experience">
+<main id="stage">
 
-<section class="hero">
- <div class="falling">
-  <svg viewBox="0 0 100 250" fill="#e8bd70">
+<!-- SCENE 1 -->
+
+<section class="scene s1 active" data-start="0">
+ <div class="energy"></div>
+
+ <div class="human">
+  <svg viewBox="0 0 100 250" fill="#e9bd70">
    <circle cx="50" cy="23" r="18"/>
    <path d="M32 48 Q50 38 68 48 L78 115 L65 125 L70 190 L57 190 L49 132 L42 190 L29 190 L35 123 L22 115Z"/>
    <path d="M27 52 L9 112 L19 117 L39 75Z"/>
@@ -394,48 +368,73 @@ footer{
   </svg>
  </div>
 
- <div class="hero-content">
-  <div class="label">WELCOME TO MY WORLD</div>
-  <h1>VAMSHI</h1>
-  <h2>BEYOND ORDINARY.</h2>
-  <div class="subtitle">VISION · CREATIVITY · PURPOSE</div>
+ <div class="content">
+  <div class="label enter">WELCOME TO MY WORLD</div>
+  <h1 class="giant gold zoom">VAMSHI</h1>
+  <div class="sub enter">BEYOND ORDINARY.</div>
+  <p class="small">VISION · CREATIVITY · PURPOSE</p>
+ </div>
+
+ <div class="marquee">
+  <div class="slide">DREAM BIG · THINK DIFFERENT · CREATE IMPACT ·</div>
  </div>
 </section>
 
-<div class="marquee">
- <div>
-  DREAM BIG · THINK DIFFERENT · CREATE IMPACT · VAMSHI ·
-  DREAM BIG · THINK DIFFERENT · CREATE IMPACT · VAMSHI ·
- </div>
-</div>
+<!-- SCENE 2 -->
 
-<section class="scene scene-one">
- <div class="reveal">
-  <div class="small-label">01 — THE MINDSET</div>
-  <h2>NEVER<br><span class="stroke">SETTLE.</span></h2>
-  <p class="description">
+<section class="scene s2">
+ <div class="content">
+  <div class="label" style="color:#9a5b22">A NEW BEGINNING</div>
+  <h2 class="giant enter" style="color:#080808">LET GO.</h2>
+  <p class="small" style="color:#333">LEAVE THE ORDINARY BEHIND.</p>
+ </div>
+</section>
+
+<!-- SCENE 3 -->
+
+<section class="scene s3">
+ <div class="energy"></div>
+ <div class="orb"></div>
+ <div class="content">
+  <div class="label">MAKE IT COUNT</div>
+  <h2 class="giant gold enter">IMPACT.</h2>
+  <p class="small">CREATE SOMETHING THAT MATTERS.</p>
+ </div>
+</section>
+
+<!-- SCENE 4 -->
+
+<section class="scene s4">
+ <div class="energy"></div>
+ <div class="content">
+  <div class="label">01 — THE MINDSET</div>
+  <h2 class="giant enter">NEVER<br><span class="outline">SETTLE.</span></h2>
+  <p class="aboutText">
    Every great journey starts with an idea.
    The courage to create makes it real.
   </p>
  </div>
 </section>
 
-<section class="scene scene-two">
- <div class="reveal">
-  <div class="small-label">02 — THE VISION</div>
-  <h2>MAKE<br><span class="gold">IT MATTER.</span></h2>
-  <p class="description">
-   Think beyond limits. Build with purpose.
-   Create something that leaves a difference.
-  </p>
+<!-- SCENE 5 -->
+
+<section class="scene s5">
+ <div class="orb"></div>
+ <div class="content">
+  <div class="label">02 — THE VISION</div>
+  <h2 class="giant enter">THINK<br><span class="gold">BIGGER.</span></h2>
+  <p class="small">DREAM · BUILD · CREATE</p>
  </div>
 </section>
 
-<section class="about">
- <div class="about-inner reveal">
-  <div class="small-label">03 — THE PERSON</div>
-  <h2>THIS IS<br>VAMSHI.</h2>
-  <p>
+<!-- SCENE 6 -->
+
+<section class="scene s6">
+ <div class="energy"></div>
+ <div class="content">
+  <div class="label">03 — THE PERSON</div>
+  <h2 class="giant gold enter">THIS IS<br>VAMSHI.</h2>
+  <p class="aboutText">
    I believe in turning ideas into meaningful experiences.
    My journey is about creativity, learning and building
    things that can make a positive difference.
@@ -443,18 +442,15 @@ footer{
  </div>
 </section>
 
-<div class="marquee">
- <div>
-  CREATE WITH PURPOSE · BUILD WITH PASSION ·
-  CREATE WITH PURPOSE · BUILD WITH PASSION ·
- </div>
-</div>
+<!-- SCENE 7 -->
 
-<section class="project">
- <div class="project-inner reveal">
-  <div class="small-label">04 — FEATURED PROJECT</div>
-  <h2>LITTLE<br>HELP.</h2>
-  <div class="project-card">
+<section class="scene s7">
+ <div class="energy"></div>
+ <div class="content">
+  <div class="label">04 — FEATURED PROJECT</div>
+  <h2 class="giant gold enter">LITTLE<br>HELP.</h2>
+
+  <div class="projectCard">
    <h3>Little Help</h3>
    <p>
     A people-helping-people platform.
@@ -467,123 +463,214 @@ footer{
  </div>
 </section>
 
-<section class="scene scene-three">
- <div class="reveal">
-  <div class="small-label">05 — THE JOURNEY</div>
-  <h2>THIS IS<br><span class="stroke">JUST THE BEGINNING.</span></h2>
+<!-- SCENE 8 -->
+
+<section class="scene s8">
+ <div class="energy"></div>
+ <div class="content">
+  <div class="label">05 — THE JOURNEY</div>
+  <h2 class="giant enter">JUST<br><span class="outline">BEGINNING.</span></h2>
+  <p class="small">THE NEXT CHAPTER STARTS NOW.</p>
  </div>
 </section>
 
-<section class="final">
- <div class="reveal">
-  <div class="small-label">06 — THE FACE BEHIND THE VISION</div>
-  <h2>VAMSHI.</h2>
+<!-- FINAL SCENE -->
+
+<section class="scene s1">
+ <div class="energy"></div>
+ <div class="content">
+  <div class="label">THE FACE BEHIND THE VISION</div>
+  <h2 class="giant gold enter">VAMSHI.</h2>
+
   <img
+   class="finalPhoto"
    src="926728983_1172001525178618_914843091311301699_n.jpg"
    alt="Vamshi">
-  <p>THANK YOU FOR BEING HERE.</p>
+
+  <p class="footerText">THANK YOU FOR BEING HERE.</p>
  </div>
 </section>
 
 </main>
 
-<footer>VAMSHI © 2026 · MADE WITH PURPOSE</footer>
+<div id="hint">SPACE — PAUSE / RESUME</div>
 
 <script>
-const music=document.getElementById("music");
-const progress=document.getElementById("progress");
-const experience=document.getElementById("experience");
+const music = document.getElementById("music");
+const scenes = [...document.querySelectorAll(".scene")];
+const progress = document.getElementById("progress");
 
-let running=false;
-let startTime=0;
-let pausedAt=0;
-let animationFrame;
+let playing = false;
+let started = false;
+let pausedTime = 0;
+let frame = null;
 
-const totalDuration=120000;
+music.volume = 0.7;
+music.loop = false;
 
-/* Music autoplay attempt */
-music.volume=0.65;
+/*
+  Scene timings are proportional to the actual
+  audio duration, so the sequence adapts to the song.
+*/
+
+const scenePositions = [
+  0,
+  0.10,
+  0.21,
+  0.32,
+  0.44,
+  0.56,
+  0.68,
+  0.81,
+  0.91
+];
+
+function showScene(index){
+ scenes.forEach((scene,i)=>{
+  scene.classList.toggle("active",i===index);
+ });
+}
+
+function updateExperience(){
+
+ if(!playing) return;
+
+ const duration = music.duration;
+
+ if(!duration || !isFinite(duration)){
+  frame = requestAnimationFrame(updateExperience);
+  return;
+ }
+
+ const current = music.currentTime;
+ const percent = Math.min(current/duration,1);
+
+ progress.style.width = (percent*100)+"%";
+
+ let activeIndex = 0;
+
+ for(let i=0;i<scenePositions.length;i++){
+  if(percent >= scenePositions[i]){
+   activeIndex = i;
+  }
+ }
+
+ showScene(activeIndex);
+
+ if(current >= duration){
+  playing = false;
+  showScene(scenes.length-1);
+  progress.style.width = "100%";
+  return;
+ }
+
+ frame = requestAnimationFrame(updateExperience);
+}
 
 async function startExperience(){
+
  try{
+
+  if(!music.src && !music.querySelector("source")){
+   return;
+  }
+
+  if(music.ended){
+   music.currentTime = 0;
+  }
+
   await music.play();
-  running=true;
-  startTime=performance.now()-pausedAt;
-  cancelAnimationFrame(animationFrame);
-  animate();
+
+  playing = true;
+  started = true;
+
+  cancelAnimationFrame(frame);
+  updateExperience();
+
  }catch(error){
-  running=false;
+
+  playing = false;
+  console.log("Browser blocked audio autoplay. Tap once to start.");
+
  }
 }
 
-/* Automatic cinematic movement */
-function animate(now){
- if(!running)return;
+function pauseExperience(){
 
- const elapsed=performance.now()-startTime;
- const duration=music.duration && isFinite(music.duration)
-  ? music.duration*1000
-  : totalDuration;
+ if(!playing) return;
 
- const percentage=Math.min(elapsed/duration,1);
+ playing = false;
+ pausedTime = music.currentTime;
 
- const maxScroll=
-  document.documentElement.scrollHeight-window.innerHeight;
-
- window.scrollTo(0,maxScroll*percentage);
-
- progress.style.width=(percentage*100)+"%";
-
- if(percentage<1){
-  animationFrame=requestAnimationFrame(animate);
- }else{
-  running=false;
- }
+ music.pause();
+ cancelAnimationFrame(frame);
 }
 
-/* Pause and resume using SPACE */
-function toggleExperience(){
- if(running){
-  running=false;
-  pausedAt=performance.now()-startTime;
-  music.pause();
-  cancelAnimationFrame(animationFrame);
- }else{
-  startExperience();
- }
+function resumeExperience(){
+
+ if(playing) return;
+
+ startExperience();
 }
+
+/* SPACEBAR PAUSE / RESUME */
 
 document.addEventListener("keydown",event=>{
+
  if(event.code==="Space"){
   event.preventDefault();
-  toggleExperience();
- }
-});
 
-/* Reveal scenes */
-const observer=new IntersectionObserver(entries=>{
- entries.forEach(entry=>{
-  if(entry.isIntersecting){
-   entry.target.classList.add("visible");
+  if(playing){
+   pauseExperience();
+  }else{
+   resumeExperience();
   }
- });
-},{threshold:.15});
+ }
 
-document.querySelectorAll(".reveal").forEach(element=>{
- observer.observe(element);
 });
 
-/* Start when browser allows autoplay */
+/* Browser autoplay fallback */
+
 window.addEventListener("load",()=>{
- startExperience();
+
+ music.load();
+
+ showScene(0);
+
+ music.play().then(()=>{
+
+  playing = true;
+  started = true;
+  updateExperience();
+
+ }).catch(()=>{
+
+  console.log("Waiting for browser permission.");
+
+ });
+
 });
 
-/* If autoplay was blocked, retry after first user interaction */
+/*
+  If the browser blocks autoplay, first user
+  interaction starts the song without a visible button.
+*/
+
 document.addEventListener("pointerdown",()=>{
- if(!running && music.paused){
+
+ if(!started && music.paused){
   startExperience();
  }
+
 },{once:true});
+
+/* Keep scene synced with audio */
+
+music.addEventListener("ended",()=>{
+ playing = false;
+ showScene(scenes.length-1);
+ progress.style.width = "100%";
+});
 
 </script>
 

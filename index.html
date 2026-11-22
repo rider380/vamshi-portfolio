@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
 <title>VAMSHI — Beyond Ordinary</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +18,9 @@
  --black:#080808;
 }
 
-html{scroll-behavior:auto}
+html{
+ scroll-behavior:auto;
+}
 
 body{
  background:var(--black);
@@ -35,8 +38,6 @@ body:after{
  opacity:.10;
  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
 }
-
-*{cursor:default}
 
 #progress{
  position:fixed;
@@ -58,6 +59,7 @@ body:after{
  justify-content:space-between;
  align-items:center;
  mix-blend-mode:difference;
+ pointer-events:none;
 }
 
 .brand{
@@ -73,6 +75,7 @@ body:after{
 
 section{
  min-height:100vh;
+ min-height:100svh;
  position:relative;
  overflow:hidden;
  display:flex;
@@ -124,6 +127,7 @@ section{
  font-weight:400;
  background:linear-gradient(180deg,#fff4d9,#e8bd70 55%,#87501c);
  -webkit-background-clip:text;
+ background-clip:text;
  color:transparent;
  text-shadow:0 20px 70px #0008;
 }
@@ -159,6 +163,7 @@ section{
  transform:translateX(-50%);
  animation:fall 12s ease-in-out infinite;
  filter:drop-shadow(0 0 30px #e7b65e);
+ pointer-events:none;
 }
 
 @keyframes fall{
@@ -393,6 +398,8 @@ footer{
  transform:translateY(0);
 }
 
+/* Mobile adjustments */
+
 @media(max-width:600px){
 
  .topbar{padding:20px 5%}
@@ -465,16 +472,34 @@ footer{
   font-size:clamp(55px,13vw,95px);
  }
 
- .final img{height:400px}
+ .final img{
+  height:400px;
+  max-width:100%;
+ }
 
  .final p{
   font-size:8px;
   letter-spacing:.20em;
  }
 
- .falling{width:65px;height:180px}
+ .falling{
+  width:65px;
+  height:180px;
+ }
+
+ section{
+  padding-left:7%;
+  padding-right:7%;
+ }
 }
 
+@media(prefers-reduced-motion:reduce){
+ .marquee div,
+ .falling,
+ .hero:before{
+  animation:none;
+ }
+}
 </style>
 </head>
 
@@ -487,7 +512,7 @@ footer{
  <span>PERSONAL PORTFOLIO</span>
 </header>
 
-<audio id="music" autoplay loop preload="auto">
+<audio id="music" autoplay loop preload="auto" playsinline webkit-playsinline>
  <source src="vamshi-cinematic-audio.mp3" type="audio/mpeg">
 </audio>
 
@@ -606,135 +631,225 @@ footer{
 <footer>VAMSHI © 2026 · MADE WITH PURPOSE</footer>
 
 <script>
+const music = document.getElementById("music");
+const progress = document.getElementById("progress");
 
-const music=document.getElementById("music");
-const progress=document.getElementById("progress");
+let running = false;
+let animationFrame = null;
+let startedByUser = false;
 
-let running=false;
-let startTime=0;
-let pausedAt=0;
-let animationFrame;
+music.volume = 0.8;
 
-const totalDuration=120000;
+/* Keep visuals connected to the actual audio time */
 
-music.volume=0.65;
+function animate() {
 
-async function startExperience(){
+    if (!running || music.paused) {
+        return;
+    }
 
- try{
+    const duration = music.duration;
 
-  await music.play();
+    if (duration && isFinite(duration) && duration > 0) {
 
-  running=true;
-  startTime=performance.now()-pausedAt;
+        const percentage = Math.min(
+            music.currentTime / duration,
+            1
+        );
 
-  cancelAnimationFrame(animationFrame);
-  animate();
+        const maxScroll = Math.max(
+            0,
+            document.documentElement.scrollHeight - window.innerHeight
+        );
 
- }catch(error){
+        window.scrollTo(
+            0,
+            maxScroll * percentage
+        );
 
-  running=false;
+        progress.style.width = (percentage * 100) + "%";
+    }
 
- }
-
+    animationFrame = requestAnimationFrame(animate);
 }
 
-function animate(){
+/* Start music and visuals together */
 
- if(!running)return;
+async function startExperience() {
 
- const elapsed=performance.now()-startTime;
+    if (!music.paused && running) {
+        return;
+    }
 
- const duration=music.duration && isFinite(music.duration)
-  ? music.duration*1000
-  : totalDuration;
+    try {
 
- const percentage=Math.min(elapsed/duration,1);
+        await music.play();
 
- const maxScroll=
-  document.documentElement.scrollHeight-window.innerHeight;
+        running = true;
+        startedByUser = true;
 
- window.scrollTo(0,maxScroll*percentage);
+        cancelAnimationFrame(animationFrame);
+        animate();
 
- progress.style.width=(percentage*100)+"%";
+    } catch (error) {
 
- if(percentage<1){
+        running = false;
 
-  animationFrame=requestAnimationFrame(animate);
+        console.log(
+            "Audio needs a user tap before playback:",
+            error
+        );
 
- }else{
-
-  running=false;
-
- }
-
+    }
 }
 
-function toggleExperience(){
+/* Pause both music and visual movement */
 
- if(running){
+function pauseExperience() {
 
-  running=false;
-  pausedAt=performance.now()-startTime;
+    running = false;
 
-  music.pause();
-  cancelAnimationFrame(animationFrame);
+    music.pause();
 
- }else{
-
-  startExperience();
-
- }
-
+    cancelAnimationFrame(animationFrame);
 }
 
-document.addEventListener("keydown",event=>{
+/* Play / Pause using Spacebar */
 
- if(event.code==="Space"){
+function toggleExperience() {
 
-  event.preventDefault();
-  toggleExperience();
+    if (!music.paused) {
 
- }
+        pauseExperience();
+
+    } else {
+
+        startExperience();
+
+    }
+}
+
+/* Try autoplay when the page loads */
+
+window.addEventListener("load", function() {
+
+    music.load();
+
+    startExperience();
 
 });
 
-const observer=new IntersectionObserver(entries=>{
+/* Mobile browsers require a user gesture for audible playback.
+   The first tap anywhere on the page starts the experience. */
 
- entries.forEach(entry=>{
+function handleFirstInteraction() {
 
-  if(entry.isIntersecting){
+    if (music.paused) {
+        startExperience();
+    }
 
-   entry.target.classList.add("visible");
+}
 
-  }
+document.addEventListener(
+    "pointerdown",
+    handleFirstInteraction
+);
 
- });
+document.addEventListener(
+    "touchend",
+    handleFirstInteraction,
+    { passive: true }
+);
 
-},{threshold:.15});
+/* Keep visuals paused if audio is paused */
 
-document.querySelectorAll(".reveal").forEach(element=>{
+music.addEventListener("pause", function() {
 
- observer.observe(element);
+    running = false;
+
+    cancelAnimationFrame(animationFrame);
 
 });
 
-window.addEventListener("load",()=>{
+/* Resume visual movement when audio starts */
 
- startExperience();
+music.addEventListener("play", function() {
+
+    if (!running) {
+
+        running = true;
+
+        cancelAnimationFrame(animationFrame);
+        animate();
+
+    }
 
 });
 
-document.addEventListener("pointerdown",()=>{
+/* If audio metadata loads, the duration is ready for sync */
 
- if(!running && music.paused){
+music.addEventListener("loadedmetadata", function() {
 
-  startExperience();
+    console.log(
+        "Music duration:",
+        music.duration
+    );
 
- }
+});
 
-},{once:true});
+/* Reveal animations */
 
+const observer = new IntersectionObserver(
+
+    function(entries) {
+
+        entries.forEach(function(entry) {
+
+            if (entry.isIntersecting) {
+
+                entry.target.classList.add("visible");
+
+            }
+
+        });
+
+    },
+
+    {
+        threshold: 0.15
+    }
+
+);
+
+document.querySelectorAll(".reveal").forEach(function(element) {
+
+    observer.observe(element);
+
+});
+
+/* Spacebar play / pause */
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.code === "Space") {
+
+        event.preventDefault();
+
+        toggleExperience();
+
+    }
+
+});
+
+/* Handle audio errors */
+
+music.addEventListener("error", function() {
+
+    console.error(
+        "Music file could not be loaded. Check the MP3 filename in GitHub."
+    );
+
+});
 </script>
 
 </body>

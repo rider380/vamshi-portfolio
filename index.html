@@ -3,1149 +3,322 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080706">
-
-<title>VAMSHI — Cinematic Portfolio</title>
-
-<meta name="description" content="Vamshi — Personal Portfolio, Ideas, Vision and Little Help.">
+<meta name="theme-color" content="#090909">
+<title>VAMSHI | Cinematic Portfolio</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
 <style>
-:root {
- --black:#070707;
- --white:#f4f0e9;
- --gold:#e7ad43;
- --muted:#aaa39a;
-}
-
-* {
- box-sizing:border-box;
- margin:0;
- padding:0;
-}
-
-html {
- scroll-behavior:smooth;
- background:var(--black);
-}
-
-body {
- background:var(--black);
- color:var(--white);
- font-family:Manrope,Arial,sans-serif;
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ background:#080808;
+ color:#fff;
+ font-family:Inter,sans-serif;
  overflow-x:hidden;
 }
-
-a {
- color:inherit;
- text-decoration:none;
+:root{--gold:#e5b65b;--red:#a71925}
+section{position:relative;overflow:hidden}
+.noise{
+ position:fixed;inset:0;pointer-events:none;z-index:20;
+ opacity:.08;
+ background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
 }
-
-#progress {
- position:fixed;
- z-index:150;
- top:0;
- left:0;
- height:2px;
- width:0;
- background:var(--gold);
+nav{
+ position:fixed;top:0;left:0;width:100%;z-index:15;
+ padding:25px 7%;display:flex;justify-content:space-between;
+ align-items:center;mix-blend-mode:difference;
 }
-
-#noise {
- position:fixed;
- inset:0;
- z-index:90;
- pointer-events:none;
- opacity:.11;
- background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+.logo{font-weight:900;letter-spacing:5px;font-size:20px}
+nav a{color:white;text-decoration:none;font-size:11px;letter-spacing:3px}
+.hero{
+ min-height:100vh;display:flex;align-items:center;
+ justify-content:center;text-align:center;
+ background:
+ radial-gradient(ellipse at 50% 55%,#8c1d23 0%,#401014 25%,#10090a 58%,#050505 100%);
 }
-
-#intro {
- position:fixed;
- inset:0;
- background:#050505;
- display:grid;
- place-items:center;
- z-index:200;
- transition:opacity .9s,visibility .9s;
+.hero:before{
+ content:"";position:absolute;width:80vw;height:80vw;
+ border-radius:50%;background:#ff4b20;filter:blur(130px);
+ opacity:.16;animation:pulse 5s infinite alternate;
 }
-
-#intro.done {
- opacity:0;
- visibility:hidden;
+@keyframes pulse{to{transform:scale(1.3);opacity:.3}}
+.hero-content{position:relative;z-index:3;padding:100px 20px}
+.eyebrow{letter-spacing:8px;font-size:11px;color:var(--gold)}
+.hero h1{
+ font-family:Anton,sans-serif;
+ font-size:clamp(85px,20vw,260px);
+ line-height:.85;letter-spacing:-5px;
+ background:linear-gradient(180deg,#fff4d4,#d69b38 65%,#75400c);
+ -webkit-background-clip:text;color:transparent;
+ text-shadow:0 10px 70px #e8a33c30;
 }
+.hero p{margin-top:35px;letter-spacing:5px;font-size:11px;color:#ddd}
+.scroll{margin-top:65px;font-size:10px;letter-spacing:5px;color:#aaa}
 
-.intro-word {
- font-size:clamp(65px,15vw,170px);
- font-weight:800;
- letter-spacing:-.1em;
- animation:introIn 1s both;
-}
-
-.intro-word span {
- color:var(--gold);
-}
-
-@keyframes introIn {
- from {
-  opacity:0;
-  filter:blur(18px);
-  transform:scale(.86);
- }
- to {
-  opacity:1;
-  filter:blur(0);
-  transform:scale(1);
- }
-}
-
-#sound {
- position:fixed;
- right:22px;
- bottom:20px;
- z-index:160;
- background:#0c0c0ce8;
- border:1px solid #ffffff42;
- color:white;
- padding:12px 15px;
- font:10px 'DM Mono';
- letter-spacing:.12em;
- cursor:pointer;
-}
-
-#sound b {
- color:var(--gold);
- font-weight:500;
-}
-
-nav {
- position:fixed;
- z-index:100;
- top:0;
- left:0;
- width:100%;
- display:flex;
- align-items:center;
- justify-content:space-between;
- padding:24px 5vw;
- background:linear-gradient(#050505d9,transparent);
-}
-
-.logo {
- font-size:14px;
- font-weight:800;
- letter-spacing:.28em;
-}
-
-.logo span {
- color:var(--gold);
-}
-
-.nav {
- display:flex;
- gap:25px;
- font:9px 'DM Mono';
- letter-spacing:.15em;
- color:#c7c0b5;
-}
-
-.nav a:hover {
- color:var(--gold);
-}
-
-/* HERO */
-
-.hero {
- min-height:100svh;
- position:relative;
- display:grid;
- place-items:center;
- text-align:center;
+/* HUMAN FALLING ANIMATION */
+.falling-stage{
+ position:absolute;inset:0;z-index:2;pointer-events:none;
  overflow:hidden;
- padding:120px 5vw 80px;
- background:radial-gradient(
-  ellipse at 50% 48%,
-  #4b1714 0%,
-  #1c0d0c 32%,
-  #070707 72%
- );
 }
-
-.hero:before {
- content:"";
- position:absolute;
- inset:-30%;
- background:conic-gradient(
-  from 10deg at 50% 50%,
-  transparent 0 25deg,
-  #ff5a351c 42deg,
-  transparent 65deg 155deg,
-  #f2ae4c19 180deg,
-  transparent 210deg 360deg
- );
- filter:blur(34px);
- animation:flare 15s linear infinite;
+.human{
+ position:absolute;left:50%;top:-260px;
+ width:95px;height:240px;
+ transform:translateX(-50%);
+ animation:humanFall 7s cubic-bezier(.45,.05,.55,.95) infinite;
+ filter:drop-shadow(0 0 25px #f1b44c70);
 }
-
-.hero:after {
- content:"";
- position:absolute;
- width:min(78vw,900px);
- aspect-ratio:1;
- border:1px solid #e6ad4333;
- border-radius:50%;
- box-shadow:0 0 90px #e6ad4314,
- inset 0 0 90px #e6ad4310;
- animation:slowspin 35s linear infinite;
+@keyframes humanFall{
+ 0%{top:-260px;transform:translateX(-50%) rotate(-12deg);opacity:0}
+ 12%{opacity:1}
+ 45%{transform:translateX(-50%) rotate(9deg)}
+ 75%{transform:translateX(-50%) rotate(-5deg)}
+ 100%{top:110%;transform:translateX(-50%) rotate(12deg);opacity:0}
 }
+.human svg{width:100%;height:100%}
 
-@keyframes flare {
- to {
-  transform:rotate(360deg) scale(1.12);
- }
+/* CINEMATIC TEXT SCENES */
+.scene{
+ min-height:100vh;display:flex;align-items:center;
+ justify-content:center;text-align:center;padding:90px 7%;
 }
-
-@keyframes slowspin {
- to {
-  transform:rotate(360deg);
- }
+.scene.red{
+ background:radial-gradient(ellipse at center,#781b20,#210c10 55%,#080808);
 }
-
-.hero-content {
- position:relative;
- z-index:2;
+.scene.gold{
+ background:radial-gradient(ellipse at center,#50310e,#17100a 55%,#080808);
 }
-
-.eyebrow,.label {
- font:10px 'DM Mono';
- letter-spacing:.28em;
- text-transform:uppercase;
- color:var(--gold);
+.scene h2{
+ font-family:Anton,sans-serif;
+ font-size:clamp(55px,12vw,160px);
+ line-height:.92;text-transform:uppercase;
 }
-
-.hero h1 {
- font-size:clamp(76px,18vw,240px);
- line-height:.82;
- letter-spacing:-.105em;
- font-weight:800;
- margin:27px 0;
- background:linear-gradient(
-  180deg,
-  #fff 5%,
-  #e7c98f 48%,
-  #966a2d 100%
- );
- color:transparent;
- background-clip:text;
- -webkit-background-clip:text;
- animation:titleIn 1.4s .15s both;
+.outline{
+ color:transparent;-webkit-text-stroke:1px #e5b65b;
 }
-
-@keyframes titleIn {
- from {
-  opacity:0;
-  transform:translateY(45px) scale(.92);
-  filter:blur(14px);
- }
- to {
-  opacity:1;
-  transform:none;
-  filter:blur(0);
- }
+.small{
+ color:var(--gold);font-size:11px;
+ letter-spacing:7px;margin-bottom:28px;
 }
-
-.hero-line {
- font-size:clamp(17px,3vw,31px);
- font-weight:300;
- line-height:1.55;
-}
-
-.hero-line strong {
- color:var(--gold);
- font-weight:700;
-}
-
-.hero-caption {
- font:9px 'DM Mono';
- letter-spacing:.2em;
- color:#aaa;
- margin-top:35px;
-}
-
-.hero-foot {
- position:absolute;
- z-index:3;
- bottom:28px;
- left:5vw;
- right:5vw;
- display:flex;
- justify-content:space-between;
- color:#928b81;
- font:9px 'DM Mono';
- letter-spacing:.16em;
-}
-
-/* COMMON SECTIONS */
-
-section {
- position:relative;
- padding:140px 9vw;
-}
-
-.topline {
- display:flex;
- justify-content:space-between;
- align-items:center;
- margin-bottom:38px;
-}
-
-.topline small {
- font:9px 'DM Mono';
- letter-spacing:.17em;
- color:#918a80;
-}
-
-.big-copy {
- font-size:clamp(43px,8.5vw,116px);
- line-height:.99;
- letter-spacing:-.075em;
- font-weight:800;
-}
-
-.gold {
- color:var(--gold);
-}
-
-.stroke {
- color:transparent;
- -webkit-text-stroke:1px #e9e0d2a6;
-}
-
-/* ABOUT */
-
-.about {
- background:linear-gradient(
-  180deg,
-  #070707,
-  #100d0a 55%,
-  #070707
- );
- min-height:80vh;
-}
-
-.about-grid {
- display:grid;
- grid-template-columns:1.25fr .75fr;
- gap:8vw;
- align-items:end;
-}
-
-.about-text {
- max-width:570px;
- color:#b4ada3;
- font-size:15px;
- line-height:2;
- margin-top:38px;
-}
-
-.side-note {
- border-left:1px solid #ffffff35;
- padding:5px 0 5px 25px;
- color:#9f978d;
- font:10px/2 'DM Mono';
- letter-spacing:.07em;
-}
-
-.side-note b {
- display:block;
- font:600 12px Manrope;
- color:#f4f0e9;
- margin-bottom:7px;
-}
-
-/* MOVING TEXT */
-
-.ticker {
- overflow:hidden;
- border-top:1px solid #ffffff26;
- border-bottom:1px solid #ffffff26;
- padding:20px 0;
- background:#0c0a08;
-}
-
-.ticker-track {
- display:flex;
- width:max-content;
- gap:35px;
- white-space:nowrap;
- animation:tick 25s linear infinite;
- font-size:clamp(24px,4vw,48px);
- font-weight:800;
- letter-spacing:-.05em;
- color:#776b5a;
-}
-
-.ticker-track span:nth-child(2n) {
- color:var(--gold);
-}
-
-@keyframes tick {
- to {
-  transform:translateX(-50%);
- }
-}
-
-/* PROJECT */
-
-.project {
- overflow:hidden;
- background:radial-gradient(
-  ellipse at 76% 48%,
-  #542015 0%,
-  #21100d 30%,
-  #080707 72%
- );
-}
-
-.project:before {
- content:"";
- position:absolute;
- width:60vw;
- aspect-ratio:1;
- right:-17vw;
- top:5%;
- border:1px solid #e7ad4330;
- border-radius:50%;
- box-shadow:0 0 110px #e7ad4315,
- inset 0 0 80px #e7ad4310;
-}
-
-.project-grid {
- position:relative;
- z-index:2;
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:6vw;
- align-items:center;
-}
-
-.project-title {
- font-size:clamp(55px,9vw,120px);
- font-weight:800;
- line-height:.82;
- letter-spacing:-.09em;
- margin-top:27px;
-}
-
-.project-description {
- max-width:460px;
- color:#b7aea2;
- line-height:2;
- font-size:14px;
- margin-top:32px;
-}
-
-.tags {
- display:flex;
- flex-wrap:wrap;
- gap:9px;
- margin-top:30px;
-}
-
-.tags span {
- border:1px solid #e7ad4366;
- color:#e4c58c;
- padding:10px 12px;
- font:9px 'DM Mono';
- letter-spacing:.13em;
-}
-
-/* 3D LAPTOP */
-
-.laptop-area {
- perspective:1000px;
- min-height:420px;
- display:grid;
- place-items:center;
-}
-
-.laptop {
- width:min(100%,520px);
- transform:rotateY(-12deg) rotateX(4deg);
- animation:float 5s ease-in-out infinite;
- filter:drop-shadow(0 35px 32px #000c);
-}
-
-@keyframes float {
- 50% {
-  transform:rotateY(-7deg) rotateX(2deg) translateY(-14px);
- }
-}
-
-.laptop-screen {
- aspect-ratio:16/10;
- border:8px solid #292724;
- border-bottom-width:13px;
- border-radius:12px 12px 4px 4px;
- display:grid;
- place-items:center;
- overflow:hidden;
- position:relative;
- background:radial-gradient(
-  circle at 50% 48%,
-  #a83a1d 0%,
-  #4b1a12 27%,
-  #120b09 72%
- );
-}
-
-.laptop-screen:before {
- content:"";
- position:absolute;
- inset:-50%;
- background:conic-gradient(
-  transparent,
-  #ffb14b33,
-  transparent,
-  #ed4b2a26,
-  transparent
- );
- animation:flare 18s linear infinite;
-}
-
-.laptop-screen:after {
- content:"";
- position:absolute;
- inset:0;
- background:repeating-linear-gradient(
-  115deg,
-  transparent 0 20%,
-  #fff1 20.2%,
-  transparent 20.6% 40%
- );
-}
-
-.screen-copy {
- position:relative;
- z-index:2;
- text-align:center;
-}
-
-.screen-copy small {
- font:9px 'DM Mono';
- letter-spacing:.22em;
- color:#f2cf9a;
-}
-
-.screen-copy b {
- display:block;
- font-size:clamp(28px,5vw,56px);
- letter-spacing:-.08em;
- margin:13px 0;
-}
-
-.screen-copy em {
- font:9px 'DM Mono';
- letter-spacing:.17em;
- color:#e9bd78;
- font-style:normal;
-}
-
-.laptop-base {
- height:23px;
- margin:0 -5%;
- background:linear-gradient(#aaa,#333 35%,#141414);
- clip-path:polygon(5% 0,95% 0,100% 100%,0 100%);
-}
-
-/* VISION */
-
-.vision {
- min-height:78vh;
- text-align:center;
- display:grid;
- place-items:center;
- overflow:hidden;
- background:radial-gradient(
-  ellipse at center,
-  #24150e,
-  #080707 67%
- );
-}
-
-.vision:before,.vision:after {
- content:"";
- position:absolute;
- width:min(65vw,650px);
- aspect-ratio:1;
- border:1px solid #e7ad4324;
- border-radius:50%;
- animation:slowspin 35s linear infinite;
-}
-
-.vision:after {
- width:min(48vw,470px);
- animation-direction:reverse;
-}
-
-.vision-inner {
- position:relative;
- z-index:2;
-}
-
-.vision-text {
- max-width:580px;
- margin:35px auto 0;
- color:#b2a99c;
- font-size:14px;
- line-height:2;
-}
-
-/* FINAL PHOTO REVEAL */
-
-.final {
- min-height:100svh;
- display:flex;
- flex-direction:column;
- justify-content:center;
- align-items:center;
- text-align:center;
- overflow:hidden;
- background:radial-gradient(
-  ellipse at 50% 42%,
-  #4a2015 0%,
-  #170d09 38%,
-  #070707 74%
- );
-}
-
-.final:before {
- content:"";
- position:absolute;
- width:min(78vw,800px);
- aspect-ratio:1;
- border:1px solid #e7ad4330;
- border-radius:50%;
- box-shadow:0 0 100px #e7ad4312;
-}
-
-.photo-frame {
- position:relative;
- width:min(300px,68vw);
- height:min(390px,85vw);
- padding:7px;
- border:1px solid #e7ad4390;
- background:#0b0908;
- box-shadow:0 0 75px #e7ad4325;
- margin-bottom:40px;
- transform:rotate(-2deg);
-}
-
-.photo-frame:before,.photo-frame:after {
- content:"";
- position:absolute;
- width:50px;
- height:50px;
- border:1px solid var(--gold);
-}
-
-.photo-frame:before {
- top:-10px;
- left:-10px;
- border-right:0;
- border-bottom:0;
-}
-
-.photo-frame:after {
- bottom:-10px;
- right:-10px;
- border-left:0;
- border-top:0;
-}
-
-.photo-frame img {
- display:block;
- width:100%;
- height:100%;
- object-fit:cover;
-}
-
-.final h2 {
- position:relative;
- font-size:clamp(60px,14vw,165px);
- line-height:.82;
- letter-spacing:-.1em;
- font-weight:800;
-}
-
-.final h2 span {
- color:var(--gold);
-}
-
-.final-sub {
- position:relative;
- font:10px 'DM Mono';
- letter-spacing:.22em;
- color:#d0b98f;
- margin-top:27px;
-}
-
-footer {
- padding:27px 5vw;
- display:flex;
- justify-content:space-between;
- gap:15px;
+.marquee{
+ overflow:hidden;white-space:nowrap;
  border-top:1px solid #ffffff25;
- color:#8e877d;
- font:9px 'DM Mono';
- letter-spacing:.14em;
+ border-bottom:1px solid #ffffff25;
+ padding:22px 0;background:#0c0b0b;
 }
-
-/* SCROLL ANIMATION */
-
-.reveal {
- opacity:0;
- transform:translateY(48px);
- filter:blur(4px);
- transition:opacity .9s,transform .9s,filter .9s;
+.marquee span{
+ display:inline-block;font-family:Anton,sans-serif;
+ font-size:clamp(35px,7vw,85px);
+ color:var(--gold);
+ animation:move 22s linear infinite;
 }
+@keyframes move{to{transform:translateX(-50%)}}
 
-.reveal.visible {
- opacity:1;
- transform:none;
- filter:blur(0);
+.about{
+ min-height:100vh;background:#0b0b0b;
+ display:flex;align-items:center;justify-content:center;
+ padding:100px 8%;
 }
-
-/* MOBILE */
-
-@media(max-width:760px) {
-
- nav {
-  padding:19px 5vw;
- }
-
- .nav {
-  gap:12px;
-  font-size:8px;
- }
-
- .hero {
-  min-height:720px;
- }
-
- .hero h1 {
-  letter-spacing:-.1em;
- }
-
- .hero-foot {
-  font-size:7px;
- }
-
- section {
-  padding:105px 7vw;
- }
-
- .about-grid,.project-grid {
-  grid-template-columns:1fr;
-  gap:42px;
- }
-
- .side-note {
-  max-width:340px;
- }
-
- .laptop-area {
-  min-height:310px;
- }
-
- .project:before {
-  width:90vw;
-  right:-40vw;
- }
-
- footer {
-  flex-direction:column;
-  text-align:center;
- }
-
+.about-inner{max-width:950px}
+.about h2{
+ font-family:Anton,sans-serif;font-size:clamp(65px,12vw,145px);
+ line-height:.9;color:var(--gold);
 }
-
-@media(prefers-reduced-motion:reduce) {
- *,*:before,*:after {
-  animation-duration:.01ms!important;
-  animation-iteration-count:1!important;
-  scroll-behavior:auto!important;
-  transition-duration:.01ms!important;
- }
+.about p{
+ max-width:650px;margin-top:35px;
+ color:#aaa;line-height:2;font-size:15px;
+}
+.project{
+ min-height:90vh;padding:100px 8%;
+ display:flex;flex-direction:column;justify-content:center;
+ background:linear-gradient(130deg,#15100c,#080808 65%);
+}
+.project h2{
+ font-family:Anton,sans-serif;
+ font-size:clamp(65px,13vw,160px);
+ color:var(--gold);
+}
+.project-card{
+ margin-top:40px;border:1px solid #66502e;
+ padding:35px;max-width:650px;
+ background:#ffffff06;
+}
+.project-card h3{font-size:28px;margin-bottom:15px}
+.project-card p{color:#aaa;line-height:1.9}
+.project-card a{
+ display:inline-block;margin-top:25px;color:var(--gold);
+ text-decoration:none;letter-spacing:3px;font-size:11px;
+}
+.final{
+ min-height:100vh;display:flex;flex-direction:column;
+ align-items:center;justify-content:center;text-align:center;
+ background:radial-gradient(ellipse at center,#502015,#090909 70%);
+ padding:80px 20px;
+}
+.final h2{
+ font-family:Anton,sans-serif;
+ font-size:clamp(65px,15vw,180px);
+ color:var(--gold);
+}
+.final img{
+ width:min(75%,390px);height:470px;
+ object-fit:cover;object-position:center;
+ margin-top:45px;
+ border:1px solid #b98b42;
+ box-shadow:0 0 70px #d39b3b30;
+}
+.final p{margin-top:25px;letter-spacing:5px;font-size:11px;color:#bbb}
+footer{
+ background:#080808;text-align:center;padding:35px;
+ color:#777;font-size:10px;letter-spacing:4px;
+}
+.reveal{opacity:0;transform:translateY(65px);transition:1.2s ease}
+.reveal.show{opacity:1;transform:translateY(0)}
+@media(max-width:600px){
+ nav{padding:20px}
+ .hero h1{letter-spacing:-2px}
+ .human{width:65px;height:180px}
+ .final img{height:390px;width:85%}
 }
 </style>
 </head>
 
 <body>
 
-<div id="progress"></div>
-<div id="noise"></div>
-
-<div id="intro">
- <div class="intro-word">VAMSHI<span>.</span></div>
-</div>
-
-<button id="sound" type="button">
- SOUND <b>OFF</b> · TAP TO PLAY
-</button>
-
-<audio id="music"
- src="vamshi-cinematic-audio.mp3"
- preload="auto"
- loop>
-</audio>
+<div class="noise"></div>
 
 <nav>
- <a class="logo" href="#home">VAMSHI<span>.</span></a>
-
- <div class="nav">
-  <a href="#about">ABOUT</a>
-  <a href="#project">PROJECT</a>
-  <a href="#vision">VISION</a>
- </div>
+ <div class="logo">VAMSHI®</div>
+ <a href="#about">EXPLORE ↓</a>
 </nav>
 
-<!-- HERO -->
+<audio id="bgMusic" autoplay loop preload="auto">
+ <source src="vamshi-cinematic-audio.mp3" type="audio/mpeg">
+</audio>
 
-<header class="hero" id="home">
+<section class="hero">
+ <div class="falling-stage">
+  <div class="human">
+   <svg viewBox="0 0 100 240" fill="#d9b477">
+    <circle cx="50" cy="23" r="18"/>
+    <path d="M32 48 Q50 37 68 48 L77 115 L64 124 L68 185 L57 185 L49 130 L42 185 L30 185 L35 120 L22 112 Z"/>
+    <path d="M27 52 L10 112 L19 117 L39 76 Z"/>
+    <path d="M72 52 L90 112 L81 117 L61 76 Z"/>
+    <path d="M30 184 L43 184 L35 235 L24 235 Z"/>
+    <path d="M57 184 L70 184 L78 235 L66 235 Z"/>
+   </svg>
+  </div>
+ </div>
 
  <div class="hero-content">
-
-  <div class="eyebrow">
-   A CINEMATIC PERSONAL PORTFOLIO
-  </div>
-
+  <div class="eyebrow">A PERSONAL CINEMATIC EXPERIENCE</div>
   <h1>VAMSHI</h1>
-
-  <div class="hero-line">
-   Good ideas deserve<br>
-   <strong>exceptional execution.</strong>
-  </div>
-
-  <div class="hero-caption">
-   A PERSONAL STORY · A VISION IN MOTION
-  </div>
-
+  <p>VISION · CREATIVITY · EXECUTION</p>
+  <div class="scroll">SCROLL TO EXPLORE ↓</div>
  </div>
+</section>
 
- <div class="hero-foot">
-  <span>INDEPENDENT THINKING</span>
-  <span>SCROLL TO EXPLORE ↓</span>
- </div>
-
-</header>
-
-<!-- MOVING TEXT -->
-
-<div class="ticker">
- <div class="ticker-track">
-
-  <span>IDEAS INTO REALITY</span>
-  <span>✦</span>
-  <span>THINK BEYOND LIMITS</span>
-  <span>✦</span>
-  <span>BUILD WITH PURPOSE</span>
-  <span>✦</span>
-
-  <span>IDEAS INTO REALITY</span>
-  <span>✦</span>
-  <span>THINK BEYOND LIMITS</span>
-  <span>✦</span>
-  <span>BUILD WITH PURPOSE</span>
-  <span>✦</span>
-
- </div>
+<div class="marquee">
+ <span>
+  &nbsp; DREAM BIG · BUILD DIFFERENT · STAY ORIGINAL · VAMSHI ·
+  DREAM BIG · BUILD DIFFERENT · STAY ORIGINAL · VAMSHI ·
+ </span>
 </div>
 
-<!-- ABOUT -->
+<section class="scene red">
+ <div class="reveal">
+  <div class="small">01 — THE MINDSET</div>
+  <h2>BUILT TO<br><span class="outline">BE DIFFERENT</span></h2>
+ </div>
+</section>
+
+<section class="scene gold">
+ <div class="reveal">
+  <div class="small">02 — THE VISION</div>
+  <h2>BIG IDEAS.<br>REAL IMPACT.</h2>
+ </div>
+</section>
 
 <section class="about" id="about">
-
- <div class="topline">
-  <span class="label">01 / ABOUT VAMSHI</span>
-  <small>PERSONAL IDENTITY</small>
+ <div class="about-inner reveal">
+  <div class="small">03 — ABOUT ME</div>
+  <h2>THIS IS<br>VAMSHI.</h2>
+  <p>
+   I believe in turning ideas into meaningful experiences.
+   I am passionate about creating things that bring people
+   together and make a positive difference.
+   Every journey begins with one idea and the courage to build it.
+  </p>
  </div>
-
- <div class="about-grid">
-
-  <div class="reveal">
-
-   <h2 class="big-copy">
-    I THINK IN<br>
-    <span class="gold">IDEAS.</span><br>
-    <span class="stroke">I BUILD</span><br>
-    WITH PURPOSE.
-   </h2>
-
-   <p class="about-text">
-    I’m Vamshi. I’m curious about what’s possible
-    and motivated by turning ideas into something real.
-    This portfolio is a glimpse into my thinking,
-    my vision and the project I’m building.
-    Every journey starts somewhere — this is mine.
-   </p>
-
-  </div>
-
-  <div class="side-note reveal">
-
-   <b>MY MINDSET</b>
-
-   Stay curious.<br>
-   Keep learning.<br>
-   Think independently.<br>
-   Build things that matter.
-
-   <br><br>
-
-   <b>MY FOCUS</b>
-
-   Ideas · Creativity · Meaningful projects
-
-  </div>
-
- </div>
-
 </section>
 
-<!-- MOVING TEXT -->
-
-<div class="ticker">
- <div class="ticker-track">
-
-  <span>CREATE SOMETHING MEANINGFUL</span>
-  <span>✦</span>
-  <span>ONE STEP AT A TIME</span>
-  <span>✦</span>
-
-  <span>CREATE SOMETHING MEANINGFUL</span>
-  <span>✦</span>
-  <span>ONE STEP AT A TIME</span>
-  <span>✦</span>
-
- </div>
+<div class="marquee">
+ <span>
+  &nbsp; CREATE WITH PURPOSE · MAKE A DIFFERENCE · CREATE WITH PURPOSE ·
+  MAKE A DIFFERENCE ·
+ </span>
 </div>
 
-<!-- LITTLE HELP PROJECT -->
-
-<section class="project" id="project">
-
- <div class="topline">
-  <span class="label">02 / FEATURED PROJECT</span>
-  <small>PROJECT 001</small>
- </div>
-
- <div class="project-grid">
-
-  <div class="project-copy reveal">
-
-   <div class="label">
-    A PURPOSE-DRIVEN IDEA
-   </div>
-
-   <h2 class="project-title">
-    LITTLE<br>
-    <span class="gold">HELP.</span>
-   </h2>
-
-   <p class="project-description">
-    A platform built around a simple belief:
-    people should be able to connect when someone
-    needs help and someone else is willing to offer it.
-    Little Help is my effort to turn that idea into
-    a meaningful community project.
+<section class="project">
+ <div class="reveal">
+  <div class="small">04 — FEATURED PROJECT</div>
+  <h2>LITTLE<br>HELP.</h2>
+  <div class="project-card">
+   <h3>Little Help</h3>
+   <p>
+    A people-helping-people platform designed to connect
+    those who need help with those who are ready to offer help.
+    A small step towards a more supportive community.
    </p>
-
-   <div class="tags">
-    <span>COMMUNITY</span>
-    <span>HELPING PEOPLE</span>
-    <span>IN PROGRESS</span>
-   </div>
-
+   <a href="#">A PROJECT WITH PURPOSE ↗</a>
   </div>
-
-  <!-- 3D LAPTOP -->
-
-  <div class="laptop-area reveal">
-
-   <div class="laptop">
-
-    <div class="laptop-screen">
-
-     <div class="screen-copy">
-
-      <small>
-       ONE COMMUNITY · MANY GOOD DEEDS
-      </small>
-
-      <b>LITTLE HELP</b>
-
-      <em>
-       PEOPLE HELPING PEOPLE
-      </em>
-
-     </div>
-
-    </div>
-
-    <div class="laptop-base"></div>
-
-   </div>
-
-  </div>
-
  </div>
-
 </section>
 
-<!-- VISION -->
-
-<section class="vision" id="vision">
-
- <div class="vision-inner reveal">
-
-  <div class="topline" style="justify-content:center">
-   <span class="label">03 / THE VISION</span>
-  </div>
-
-  <h2 class="big-copy">
-   DREAM IT.<br>
-   <span class="gold">BUILD IT.</span><br>
-   <span class="stroke">MAKE IT</span><br>
-   MATTER.
-  </h2>
-
-  <p class="vision-text">
-   I want to keep learning, explore bigger possibilities
-   and create work that has a positive purpose.
-   I’m still at the beginning — and there is much more
-   to build.
-  </p>
-
+<section class="scene red">
+ <div class="reveal">
+  <div class="small">05 — THE JOURNEY</div>
+  <h2>THE STORY<br><span class="outline">CONTINUES.</span></h2>
  </div>
-
 </section>
 
-<!-- FINAL PHOTO -->
-
-<section class="final" id="final">
-
- <div class="photo-frame reveal">
-
+<section class="final">
+ <div class="reveal">
+  <div class="small">06 — THE PERSON BEHIND THE VISION</div>
+  <h2>VAMSHI.</h2>
   <img
    src="926728983_1172001525178618_914843091311301699_n.jpg"
-   alt="Vamshi"
-  >
-
+   alt="Vamshi">
+  <p>THANK YOU FOR BEING HERE.</p>
  </div>
-
- <div class="label reveal" style="margin-bottom:22px">
-  THE PERSON BEHIND THE IDEAS
- </div>
-
- <h2 class="reveal">
-  THIS IS<br>
-  <span>VAMSHI.</span>
- </h2>
-
- <p class="final-sub reveal">
-  MY JOURNEY. MY VISION. MY NEXT CHAPTER.
- </p>
-
 </section>
 
 <footer>
-
- <span>VAMSHI © 2026</span>
-
- <span>IDEAS · VISION · LITTLE HELP</span>
-
+ VAMSHI © 2026 · MADE WITH PURPOSE
 </footer>
 
 <script>
-
-// INTRO ANIMATION
-
-window.addEventListener('load',()=>{
- setTimeout(()=>{
-  document.getElementById('intro').classList.add('done');
- },1100);
-});
-
-// SOUND CONTROL
-
-const music=document.getElementById('music');
-const sound=document.getElementById('sound');
-
-sound.addEventListener('click',async()=>{
-
- if(music.paused){
-
-  try{
-
-   await music.play();
-
-   sound.innerHTML='SOUND <b>ON</b> · TAP TO MUTE';
-
-  }catch(error){
-
-   sound.innerHTML='AUDIO FILE NOT FOUND';
-
-  }
-
- }else{
-
-  music.pause();
-
-  sound.innerHTML='SOUND <b>OFF</b> · TAP TO PLAY';
-
- }
-
-});
-
-// SCROLL REVEAL
-
-const observer=new IntersectionObserver(entries=>{
-
+/* Scroll reveal */
+const observer = new IntersectionObserver(entries=>{
  entries.forEach(entry=>{
-
   if(entry.isIntersecting){
-
-   entry.target.classList.add('visible');
-
-   observer.unobserve(entry.target);
-
+   entry.target.classList.add("show");
   }
-
  });
+},{threshold:0.15});
 
-},{threshold:.13});
-
-document.querySelectorAll('.reveal').forEach(element=>{
- observer.observe(element);
+document.querySelectorAll(".reveal").forEach(el=>{
+ observer.observe(el);
 });
 
-// SCROLL PROGRESS
+/* Background music autoplay attempt */
+const music=document.getElementById("bgMusic");
+music.volume=0.65;
 
-const bar=document.getElementById('progress');
-
-window.addEventListener('scroll',()=>{
-
- const total=document.documentElement.scrollHeight-innerHeight;
-
- bar.style.width=
-  (total>0?scrollY/total*100:0)+'%';
-
-},{passive:true});
-
+window.addEventListener("load",()=>{
+ music.play().catch(()=>{});
+});
 </script>
 
 </body>

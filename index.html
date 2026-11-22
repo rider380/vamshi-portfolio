@@ -18,9 +18,7 @@
  --black:#080808;
 }
 
-html{
- scroll-behavior:auto;
-}
+html{scroll-behavior:auto}
 
 body{
  background:var(--black);
@@ -268,13 +266,9 @@ section{
 
 /* About */
 
-.about{
- background:#090909;
-}
+.about{background:#090909}
 
-.about-inner{
- max-width:1000px;
-}
+.about-inner{max-width:1000px}
 
 .about h2{
  font-family:Anton,sans-serif;
@@ -398,7 +392,7 @@ footer{
  transform:translateY(0);
 }
 
-/* Mobile adjustments */
+/* Original mobile settings */
 
 @media(max-width:600px){
 
@@ -500,12 +494,239 @@ footer{
   animation:none;
  }
 }
+
+/* ===== PREMIUM MOBILE + CINEMATIC UPGRADE ===== */
+
+#cinematicFX{
+ position:fixed;
+ inset:0;
+ width:100%;
+ height:100%;
+ z-index:2;
+ pointer-events:none;
+ opacity:.72;
+}
+
+section{isolation:isolate}
+
+section:after{
+ content:"";
+ position:absolute;
+ inset:0;
+ pointer-events:none;
+ z-index:1;
+ background:linear-gradient(135deg,rgba(232,189,112,.035),transparent 38%,rgba(142,23,30,.055));
+}
+
+.hero-content,.scene>.reveal,.about-inner,.project-inner,.final>.reveal{
+ position:relative;
+ z-index:3;
+}
+
+.hero-content,.reveal{transform-style:preserve-3d}
+
+.hero-content{
+ animation:cinematicEntrance 1.8s cubic-bezier(.2,.75,.2,1) both;
+}
+
+@keyframes cinematicEntrance{
+ from{
+  opacity:0;
+  transform:translate3d(0,38px,-35px) rotateX(7deg);
+  filter:blur(9px);
+ }
+ to{
+  opacity:1;
+  transform:translate3d(0,0,0) rotateX(0);
+  filter:blur(0);
+ }
+}
+
+.hero h1,.scene h2,.about h2,.project h2,.final h2{
+ text-shadow:0 12px 38px rgba(0,0,0,.42);
+}
+
+.marquee div{will-change:transform}
+.falling{will-change:top,transform,opacity}
+.reveal{will-change:opacity,transform}
+
+.project-card,.final img{
+ transition:transform .7s ease,box-shadow .7s ease,border-color .7s ease;
+}
+
+.project-card:hover{
+ transform:translateY(-5px) perspective(900px) rotateX(2deg);
+ box-shadow:0 22px 55px #0008,0 0 30px #e8bd7012;
+}
+
+.final img{transform:perspective(1000px) rotateY(-2deg)}
+
+.final img:hover{
+ transform:perspective(1000px) rotateY(0) translateY(-5px);
+ box-shadow:0 0 115px #e8bd7045;
+}
+
+/* Compact phone layout */
+
+@media(max-width:600px){
+
+ section{
+  min-height:82svh;
+  padding:76px 6%;
+ }
+
+ .hero{
+  min-height:100svh;
+  padding:95px 6% 65px;
+ }
+
+ .label{
+  margin-bottom:20px;
+  line-height:1.7;
+  letter-spacing:4px;
+ }
+
+ .hero h1{
+  font-size:clamp(64px,17vw,104px);
+  line-height:.98;
+  letter-spacing:.045em;
+ }
+
+ .hero h2{
+  margin-top:13px;
+  font-size:clamp(15px,4.3vw,19px);
+  line-height:1.35;
+  letter-spacing:.15em;
+ }
+
+ .subtitle{
+  margin-top:17px;
+  line-height:1.7;
+  letter-spacing:3px;
+ }
+
+ .marquee{padding:14px 0}
+
+ .marquee div{
+  font-size:clamp(21px,6vw,34px);
+  line-height:1.25;
+  letter-spacing:.12em;
+ }
+
+ .scene h2{
+  font-size:clamp(43px,11.5vw,72px);
+  line-height:1.08;
+  letter-spacing:.045em;
+ }
+
+ .small-label{
+  margin-bottom:17px;
+  line-height:1.6;
+  letter-spacing:.16em;
+ }
+
+ .description{
+  margin-top:19px;
+  font-size:11px;
+  line-height:1.8;
+  letter-spacing:.025em;
+ }
+
+ .about{min-height:78svh}
+
+ .about h2{
+  font-size:clamp(49px,12vw,82px);
+  line-height:1.04;
+  letter-spacing:.055em;
+ }
+
+ .about p{
+  margin-top:20px;
+  font-size:11px;
+  line-height:1.85;
+  letter-spacing:.025em;
+ }
+
+ .project{min-height:86svh}
+
+ .project h2{
+  font-size:clamp(57px,13vw,92px);
+  line-height:1.02;
+  letter-spacing:.055em;
+ }
+
+ .project-card{
+  margin-top:23px;
+  padding:21px 19px;
+ }
+
+ .project-card h3{
+  font-size:18px;
+  line-height:1.45;
+  margin-bottom:12px;
+  letter-spacing:.12em;
+ }
+
+ .project-card p{
+  font-size:11px;
+  line-height:1.8;
+  letter-spacing:.025em;
+ }
+
+ .final{min-height:88svh}
+
+ .final h2{
+  font-size:clamp(56px,13vw,92px);
+  line-height:1.08;
+  letter-spacing:.07em;
+ }
+
+ .final img{
+  width:min(78%,340px);
+  height:clamp(260px,78vw,360px);
+  margin-top:24px;
+ }
+
+ .final p{
+  margin-top:20px;
+  line-height:1.7;
+  letter-spacing:.16em;
+ }
+
+ .reveal{
+  transform:translateY(28px);
+  transition:opacity .85s ease,transform .85s cubic-bezier(.2,.7,.2,1);
+ }
+
+ .falling{
+  width:58px;
+  height:165px;
+ }
+}
+
+@media(max-width:360px){
+
+ .topbar span{letter-spacing:1.5px;font-size:6px}
+ .brand{letter-spacing:3px}
+ .hero h1{font-size:61px}
+ .scene h2{font-size:40px}
+ .project-card{padding:18px 15px}
+}
+
+@media(prefers-reduced-motion:reduce){
+
+ #cinematicFX{display:none}
+ .hero-content{animation:none}
+ .project-card,.final img{transition:none}
+}
+
 </style>
 </head>
 
 <body>
 
 <div id="progress"></div>
+<canvas id="cinematicFX" aria-hidden="true"></canvas>
 
 <header class="topbar">
  <div class="brand">VAMSHI®</div>
@@ -850,6 +1071,112 @@ music.addEventListener("error", function() {
     );
 
 });
+
+/* ===== LIGHTWEIGHT CINEMATIC PARTICLES, TIME-SYNCED TO THE SONG ===== */
+
+(function(){
+
+ const canvas=document.getElementById("cinematicFX");
+ if(!canvas) return;
+
+ const ctx=canvas.getContext("2d",{alpha:true});
+ const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+ if(reduce || !ctx) return;
+
+ let w=0,h=0,dpr=1,raf=0,points=[];
+
+ const isMobile=window.matchMedia("(max-width:600px)").matches;
+ const total=isMobile?24:48;
+
+ function resize(){
+
+  dpr=Math.min(window.devicePixelRatio||1,1.5);
+
+  w=window.innerWidth;
+  h=window.innerHeight;
+
+  canvas.width=Math.round(w*dpr);
+  canvas.height=Math.round(h*dpr);
+
+  canvas.style.width=w+"px";
+  canvas.style.height=h+"px";
+
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+
+  points=Array.from({length:total},()=>({
+
+   x:Math.random()*w,
+   y:Math.random()*h,
+   r:Math.random()*1.5+.35,
+   v:Math.random()*.22+.07,
+   a:Math.random()*.38+.12,
+   phase:Math.random()*Math.PI*2
+
+  }));
+
+ }
+
+ function draw(){
+
+  ctx.clearRect(0,0,w,h);
+
+  const audio=document.getElementById("music");
+
+  const t=audio&&!audio.paused
+   ?audio.currentTime
+   :performance.now()/10000;
+
+  const pulse=.5+.5*Math.sin(t*2.1);
+
+  points.forEach(p=>{
+
+   p.y-=p.v*(.65+pulse*.5);
+   p.x+=Math.sin(t*.7+p.phase)*.12;
+
+   if(p.y<-5){
+    p.y=h+5;
+    p.x=Math.random()*w;
+   }
+
+   ctx.beginPath();
+
+   ctx.arc(
+    p.x,
+    p.y,
+    p.r*(.85+pulse*.18),
+    0,
+    Math.PI*2
+   );
+
+   ctx.fillStyle="rgba(232,189,112,"+(p.a*(.75+pulse*.35))+")";
+   ctx.fill();
+
+  });
+
+  raf=requestAnimationFrame(draw);
+
+ }
+
+ resize();
+ draw();
+
+ window.addEventListener("resize",resize,{passive:true});
+
+ document.addEventListener("visibilitychange",()=>{
+
+  if(document.hidden){
+   cancelAnimationFrame(raf);
+   raf=0;
+  }
+  else if(!raf){
+   draw();
+  }
+
+ });
+
+})();
+
 </script>
 
 </body>
